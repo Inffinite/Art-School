@@ -22,11 +22,6 @@ var widgetAspectRatio = cardAspectRatio * 1.2;
 class _OrientState extends State<Orient> {
   var currentPage = images.length - 1.0;
   var index = 0;
-  double xOffset = 0;
-  double yOffset = 0;
-  double scaleFactor = 1;
-
-  bool isDrawerOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +146,7 @@ class _OrientState extends State<Orient> {
 
     _careersModal(context) {
       showModalBottomSheet(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: kWhiteShade,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(25.0),
@@ -195,180 +190,146 @@ class _OrientState extends State<Orient> {
       );
     }
 
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-          child: GestureDetector(
-        onTap: () {
-          setState(() {
-            xOffset = 0;
-            yOffset = 0;
-            scaleFactor = 1;
-            isDrawerOpen = false;
-          });
-        },
-        child: AnimatedContainer(
-          transform: Matrix4.translationValues(xOffset, yOffset, 0)
-            ..scale(scaleFactor)
-            ..rotateY(isDrawerOpen ? -0.5 : 0),
-          duration: Duration(milliseconds: 250),
-          decoration: BoxDecoration(
-              color: kGreenShade,
-              borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
-          child: CustomScrollView(
-            physics: BouncingScrollPhysics(),
-            slivers: [
-              SliverAppBar(
-                // actions: [
-                //   Icon(Icons.menu, size: 20.0)
-                // ],
-                title: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10.0,
-                  ),
-                  child: Text(
-                    'Orientation',
-                    style: TextStyle(
-                        color: Color(0xFFFCF6F5), fontFamily: "SF-Pro-Text-Bold"),
-                  ),
-                ),
-                leading: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10.0,
-                  ),
-                  child: IconButton(
-                    splashRadius: 25.0,
-                    icon: Icon(
-                      CustomIcons.menu,
-                      size: 30.0,
-                      color: Color(0xFFFCF6F5),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        xOffset = 230;
-                        yOffset = 150;
-                        scaleFactor = 0.6;
-                        isDrawerOpen = true;
-                      });
-                    },
-                  ),
-                ),
-                backgroundColor: Color(0xFF2BAE66),
-                // expandedHeight: 100.0,
-                floating: true,
-                pinned: false,
+    return Scaffold(
+      backgroundColor: kGreenShade,
+      body: CustomScrollView(
+        physics: BouncingScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            // actions: [
+            //   Icon(Icons.menu, size: 20.0)
+            // ],
+            title: Padding(
+              padding: const EdgeInsets.only(
+                left: 10.0,
               ),
-              SliverList(
-                delegate: SliverChildListDelegate([
-                  // Container(
-                  //   margin: EdgeInsets.symmetric(horizontal: 10.0),
-                  //   height: 380.0,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   decoration: BoxDecoration(
-                  //       color: Color(0xFFFCF6F5),
-                  //       borderRadius: BorderRadius.circular(10.0)),
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Stack(
-                      children: <Widget>[
-                        CardScrollWidget(currentPage),
-                        Positioned.fill(
-                          child: PageView.builder(
-                            itemCount: images.length,
-                            controller: controller,
-                            reverse: true,
-                            itemBuilder: (context, index) {
-                              return Container();
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 30.0),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Snack("${courses[index].time.toString()} years",
-                                Icons.lock_clock),
-                            SizedBox(width: 10.0),
-                          ],
-                        ),
-                        SizedBox(height: 15.0),
-                        // Text(
-                        //   courses[index].description.toString(),
-                        //   style: TextStyle(
-                        //     letterSpacing: 0.5,
-                        //     height: 2.0,
-                        //     color: Color(0xFFFCF6F5),
-                        //     fontSize: 20.0,
-                        //   ),
-                        // ),
-                        Description(index),
-                        SizedBox(height: 30.0),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.0),
-                            color: kWhiteShade,
-                          ),
-                          child: FlatButton(
-                            onPressed: () {
-                              _launchUrl(courses[index].url);
-                            },
-                            child: Center(
-                              child: Text(
-                                'Learn More',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.0,
-                                  fontFamily: 'SF-Pro-Text-Bold',
-                                  color: kGreenShade,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 15.0),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.0),
-                            color: Colors.blueAccent,
-                          ),
-                          child: FlatButton(
-                            onPressed: () {
-                              _careersModal(context);
-                            },
-                            child: Center(
-                              child: Text(
-                                'Careers',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.0,
-                                  fontFamily: 'SF-Pro-Text-Bold',
-                                  color: kWhiteShade,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 30.0),
-                      ],
-                    ),
-                  ),
-                ]),
+              child: Text(
+                'Art School',
+                style: TextStyle(
+                    color: Color(0xFFFCF6F5), fontSize: 22.0,fontFamily: "SF-Pro-Text-Bold"),
               ),
-            ],
+            ),
+            leading: Padding(
+              padding: const EdgeInsets.only(
+                left: 10.0,
+              ),
+              child:Icon(
+                  CupertinoIcons.compass_fill,
+                  size: 30.0,
+                  color: Color(0xFFFCF6F5),
+                ),
+            ),
+            backgroundColor: Color(0xFF2BAE66),
+            // expandedHeight: 100.0,
+            floating: true,
+            pinned: false,
           ),
-        ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              // Container(
+              //   margin: EdgeInsets.symmetric(horizontal: 10.0),
+              //   height: 380.0,
+              //   width: MediaQuery.of(context).size.width,
+              //   decoration: BoxDecoration(
+              //       color: Color(0xFFFCF6F5),
+              //       borderRadius: BorderRadius.circular(10.0)),
+              // ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Stack(
+                  children: <Widget>[
+                    CardScrollWidget(currentPage),
+                    Positioned.fill(
+                      child: PageView.builder(
+                        itemCount: images.length,
+                        controller: controller,
+                        reverse: true,
+                        itemBuilder: (context, index) {
+                          return Container();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Snack("${courses[index].time.toString()} years",
+                            Icons.lock_clock),
+                        SizedBox(width: 10.0),
+                      ],
+                    ),
+                    SizedBox(height: 15.0),
+                    // Text(
+                    //   courses[index].description.toString(),
+                    //   style: TextStyle(
+                    //     letterSpacing: 0.5,
+                    //     height: 2.0,
+                    //     color: Color(0xFFFCF6F5),
+                    //     fontSize: 20.0,
+                    //   ),
+                    // ),
+                    Description(index),
+                    SizedBox(height: 30.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.0),
+                        color: kWhiteShade,
+                      ),
+                      child: FlatButton(
+                        onPressed: () {
+                          _launchUrl(courses[index].url);
+                        },
+                        child: Center(
+                          child: Text(
+                            'Learn More',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16.0,
+                              fontFamily: 'SF-Pro-Text-Bold',
+                              color: kGreenShade,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.0),
+                        color: Colors.blueAccent,
+                      ),
+                      child: FlatButton(
+                        onPressed: () {
+                          _careersModal(context);
+                        },
+                        child: Center(
+                          child: Text(
+                            'Careers',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16.0,
+                              fontFamily: 'SF-Pro-Text-Bold',
+                              color: kWhiteShade,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 30.0),
+                  ],
+                ),
+              ),
+            ]),
+          ),
+        ],
       ),
     );
   }
 }
-
-

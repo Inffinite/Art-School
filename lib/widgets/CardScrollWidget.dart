@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:Orientation/data.dart';
-import 'package:Orientation/data/constants.dart';
 import 'package:Orientation/screens/Orient.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,6 @@ class CardScrollWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return new AspectRatio(
       aspectRatio: widgetAspectRatio,
       child: LayoutBuilder(builder: (context, contraints) {
@@ -89,8 +87,30 @@ class CardScrollWidget extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     color: Colors.transparent,
                                     borderRadius: BorderRadius.circular(50.0)),
-                                child: Icon(Icons.star,
-                                    color: kWhiteShade),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.orangeAccent,
+                                      size: 18.0,
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.orangeAccent,
+                                      size: 18.0,
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.orangeAccent,
+                                      size: 18.0,
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.orangeAccent,
+                                      size: 18.0,
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           ],
