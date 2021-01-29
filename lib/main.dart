@@ -1,4 +1,3 @@
-import 'package:Orientation/screens/Drawer.dart';
 import 'package:Orientation/screens/Orient.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Stack(
-        children: [
-          DrawerScreen(),
-          Orient()
-        ],
-      ),
+      home: Orient()
     );
   }
 }
