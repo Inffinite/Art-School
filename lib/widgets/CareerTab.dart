@@ -20,7 +20,7 @@ class CareerTab extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: kWhiteShade,
+        color: kGreenShade,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -31,12 +31,12 @@ class CareerTab extends StatelessWidget {
               color: kWhiteShade,
               borderRadius: BorderRadius.circular(50.0),
               border: Border.all(
-                color: Colors.blueAccent,
+                color: kGreenShade,
                 width: 2.0,
               ),
             ),
             child: Center(
-              child: Icon(Icons.work_outline, color: Colors.blueAccent),
+              child: Icon(Icons.work_outline, color: kGreenShade),
             ),
           ),
           SizedBox(width: 16.0),
@@ -47,7 +47,7 @@ class CareerTab extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.w500,
-                color: Colors.blueAccent,
+                color: kWhiteShade,
               ),
             ),
           ),
