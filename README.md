@@ -1,4 +1,4 @@
-# Orientation
+# Art School
 
 A new Flutter project.
 
