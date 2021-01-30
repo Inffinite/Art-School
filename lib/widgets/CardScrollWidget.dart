@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:Orientation/data.dart';
 import 'package:Orientation/screens/Orient.dart';
 import 'package:flutter/cupertino.dart';
