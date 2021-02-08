@@ -1,13 +1,11 @@
 import 'package:Orientation/data/constants.dart';
 import 'package:Orientation/widgets/CardScrollWidget.dart';
-import 'package:Orientation/widgets/CareerTab.dart';
+import 'package:Orientation/widgets/CareerSnack.dart';
 import 'package:Orientation/widgets/Description.dart';
 import 'package:Orientation/widgets/Snack.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../customIcons.dart';
 import '../data.dart';
 import '../data/courses_data.dart';
 
@@ -78,16 +76,41 @@ class _OrientState extends State<Orient> {
       await launch(url);
     }
 
+    _course(index) {
+      switch (index) {
+        case 4:
+          return 'Fashion Design';
+          break;
+
+        case 3:
+          return 'Product Design';
+          break;
+
+        case 2:
+          return 'Drawing and Painting';
+          break;
+
+        case 1:
+          return 'Interior Design';
+          break;
+
+        case 0:
+          return 'Graphic Design';
+          break;
+        default:
+      }
+    }
+
     _careers(index) {
       switch (index) {
         case 4:
           return Column(
             children: [
-              CareerTab(name: 'Clothing Designer'),
-              CareerTab(name: 'Footwear Designer'),
-              CareerTab(name: 'Accessory Designer'),
-              CareerTab(name: 'Costume Designer'),
-              CareerTab(name: 'Apparel Designer'),
+              CareerSnack(name: 'Clothing Designer'),
+              CareerSnack(name: 'Footwear Designer'),
+              CareerSnack(name: 'Accessory Designer'),
+              CareerSnack(name: 'Costume Designer'),
+              CareerSnack(name: 'Apparel Designer'),
             ],
           );
           break;
@@ -95,11 +118,11 @@ class _OrientState extends State<Orient> {
         case 3:
           return Column(
             children: [
-              CareerTab(name: 'Product Designer'),
-              CareerTab(name: 'Textile Technologist'),
-              CareerTab(name: 'Furniture Designer'),
-              CareerTab(name: 'Interior and Spatial Designer'),
-              CareerTab(name: 'Apparel Designer'),
+              CareerSnack(name: 'Product Designer'),
+              CareerSnack(name: 'Textile Technologist'),
+              CareerSnack(name: 'Furniture Designer'),
+              CareerSnack(name: 'Interior and Spatial Designer'),
+              CareerSnack(name: 'Apparel Designer'),
             ],
           );
           break;
@@ -107,11 +130,11 @@ class _OrientState extends State<Orient> {
         case 2:
           return Column(
             children: [
-              CareerTab(name: 'Painter'),
-              CareerTab(name: 'Art Gallery Curator'),
-              CareerTab(name: 'Art Technician'),
-              CareerTab(name: 'Art Valuer'),
-              CareerTab(name: 'Conservator'),
+              CareerSnack(name: 'Painter'),
+              CareerSnack(name: 'Art Gallery Curator'),
+              CareerSnack(name: 'Art Technician'),
+              CareerSnack(name: 'Art Valuer'),
+              CareerSnack(name: 'Conservator'),
             ],
           );
           break;
@@ -119,11 +142,11 @@ class _OrientState extends State<Orient> {
         case 1:
           return Column(
             children: [
-              CareerTab(name: 'Interior Designer'),
-              CareerTab(name: 'Furniture Designer'),
-              CareerTab(name: 'Exhibition Designer'),
-              CareerTab(name: 'Lighting Designer'),
-              CareerTab(name: 'Kitchen Designer'),
+              CareerSnack(name: 'Interior Designer'),
+              CareerSnack(name: 'Furniture Designer'),
+              CareerSnack(name: 'Exhibition Designer'),
+              CareerSnack(name: 'Lighting Designer'),
+              CareerSnack(name: 'Kitchen Designer'),
             ],
           );
           break;
@@ -131,11 +154,11 @@ class _OrientState extends State<Orient> {
         case 0:
           return Column(
             children: [
-              CareerTab(name: 'Logo Designer'),
-              CareerTab(name: 'Package Designer'),
-              CareerTab(name: 'Multimedia Designer'),
-              CareerTab(name: 'Publication Designer'),
-              CareerTab(name: 'User Interface Designer'),
+              CareerSnack(name: 'Logo Designer'),
+              CareerSnack(name: 'Package Designer'),
+              CareerSnack(name: 'Multimedia Designer'),
+              CareerSnack(name: 'Publication Designer'),
+              CareerSnack(name: 'User Interface Designer'),
             ],
           );
           break;
@@ -162,23 +185,31 @@ class _OrientState extends State<Orient> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 30.0),
+                SizedBox(height: 20.0),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Center(
-                      //   child: Text(
-                      //     'Potential Careers',
-                      //     style: TextStyle(
-                      //       fontWeight: FontWeight.bold,
-                      //       fontSize: 18.0,
-                      //       color: kWhiteShade,
-                      //       fontFamily: 'SF-Pro-Text-Bold',
-                      //     ),
-                      //   ),
-                      // ),
-                      _careers(index)
+                      Text(
+                        'Careers',
+                        style: TextStyle(
+                            fontFamily: 'SF-Pro-Text-Bold',
+                            color: kGreenShade,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22.0),
+                      ),
+                      SizedBox(height: 6.0),
+                      Text(
+                        'Potential career positions for ${_course(index)}',
+                        style: TextStyle(
+                            fontFamily: 'SF-Pro-Text-Regular',
+                            color: kGreenShade,
+                            fontSize: 16.0),
+                      ),
+                      SizedBox(height: 20.0),
+                      _careers(index),
+                      SizedBox(height: 6.0),
                     ],
                   ),
                 ),
@@ -206,18 +237,20 @@ class _OrientState extends State<Orient> {
               child: Text(
                 'Art School',
                 style: TextStyle(
-                    color: Color(0xFFFCF6F5), fontSize: 22.0,fontFamily: "SF-Pro-Text-Bold"),
+                    color: Color(0xFFFCF6F5),
+                    fontSize: 22.0,
+                    fontFamily: "SF-Pro-Text-Bold"),
               ),
             ),
             leading: Padding(
               padding: const EdgeInsets.only(
                 left: 10.0,
               ),
-              child:Icon(
-                  CupertinoIcons.compass_fill,
-                  size: 30.0,
-                  color: Color(0xFFFCF6F5),
-                ),
+              child: Icon(
+                CupertinoIcons.compass_fill,
+                size: 30.0,
+                color: Color(0xFFFCF6F5),
+              ),
             ),
             backgroundColor: Color(0xFF2BAE66),
             // expandedHeight: 100.0,
@@ -333,3 +366,4 @@ class _OrientState extends State<Orient> {
     );
   }
 }
+
